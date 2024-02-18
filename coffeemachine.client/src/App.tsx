@@ -1,55 +1,60 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import './App.css';
+import MachineStatus from './Components/MachineStatus';
 
-interface Forecast {
-    date: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
-}
+const apiUrl: string = '/api/CoffeeActions';
 
 function App() {
-    const [forecasts, setForecasts] = useState<Forecast[]>();
 
     useEffect(() => {
-        populateWeatherData();
+        populateCoffeLogs();
     }, []);
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tabelLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
+    const machineStates = ["Powered On", "Water Level", "Bean feed", "Waste coffee", "Water tray"];
+
+
+
+    const handleSelectItem = (item: string) => {
+        console.log(item);
+        if (item === "POWER ON") {
+            makePowerOnReq();
+        }
+    }
+
 
     return (
         <div>
-            <h1 id="tabelLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
+            <p><MachineStatus items={machineStates} heading="Coffee Machine Status" onSelectItem={handleSelectItem} /></p>
         </div>
     );
 
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        setForecasts(data);
+
+
+
+    async function populateCoffeLogs() {
+
+        console.log(apiUrl);
+        const response = await fetch(apiUrl);
+
+        console.log(response);
+    }
+
+    async function makePowerOnReq() {
+
+        const url: string = apiUrl + "/reqPowerOn";
+
+        console.log(url);
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify('TEST')
+        });
+
+        console.log(response);
+
     }
 }
 

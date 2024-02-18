@@ -106,7 +106,7 @@ namespace CoffeeMachine.Controllers
 
         // action commands
 
-        [Route("api/[controller]/reqPowerOn")]
+        [Route("/reqPowerOn")]
         [HttpPost]
         public async Task<ActionResult<bool>> PostCoffeeReqPowerON(long id)
         {
@@ -115,7 +115,7 @@ namespace CoffeeMachine.Controllers
             return false;
         }
 
-        [Route("api/[controller]/reqPowerOFF")]
+        [Route("/reqPowerOFF")]
         [HttpPost]
         public async Task<ActionResult<bool>> PostCoffeeReqPowerOFF(long id)
         {
@@ -124,7 +124,7 @@ namespace CoffeeMachine.Controllers
             return false;
         }
 
-        [Route("api/[controller]/reqCoffee")]
+        [Route("/reqCoffee")]
         [HttpPost]
         public async Task<ActionResult<bool>> PostCoffeeReqCoffee(long id)
         {
