@@ -1,4 +1,9 @@
 
+
+
+//this props should be static content in the component, I did not have time to reintegrate the array in App.tsx
+//It would be better to use it as a Props to import the coffee machine states definition from the server.
+
 interface Props {
     items: string[];
     heading: string;
@@ -35,7 +40,7 @@ function MachineStatus({items, heading, onSelectItem }: Props) {
             </button>
             {' '}
             <button className="btn btn-primary"
-                onClick={() => { onSelectItem("POWER ON"); }}>
+                onClick={() => { onSelectItem("COFFEE"); }}>
                 MakeCoffee
             </button>
 
