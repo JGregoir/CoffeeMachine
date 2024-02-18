@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CoffeMaker.Server.Model
+namespace CoffeeMachine.Server.Models
 {
 
     public enum State
